@@ -20,7 +20,7 @@ body {
 }
 
 .fieldContainer {
-  width: 75%;
+  width: 75em;
   margin: auto;
   margin-top: 2em;
   display: flex;
