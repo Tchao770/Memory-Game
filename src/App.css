@@ -1,7 +1,8 @@
-body{
+body {
   background-color: rgba(0, 0, 0, 0.781);
 }
-.heading{
+
+.heading {
   text-align: center;
   background-color: rgb(255, 255, 255);
   margin: auto;
@@ -10,7 +11,15 @@ body{
   width: 25%;
   border-radius: 25px;
 }
-.fieldContainer{
+
+.scoreCounter {
+  background-color: cornsilk;
+  width: 10%;
+  margin: auto;
+  text-align: center;
+}
+
+.fieldContainer {
   width: 75%;
   margin: auto;
   margin-top: 2em;
@@ -19,13 +28,17 @@ body{
   flex-wrap: wrap;
 }
 
-.Card{
+.Card {
+  text-align: center;
   background-color: blanchedalmond;
   margin-top: 10px;
-  flex: 0 0 32%;
+  flex: 0 0 31%;
   height: 20em;
+  margin: 10px;
+  user-select: none;
 }
-.Card:hover{
+
+.Card:hover {
   background-color: rgb(255, 244, 227);
-  animation-duration: 0.5s;
+  transition-duration: 0.5s;
 }
