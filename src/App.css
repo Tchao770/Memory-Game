@@ -1,0 +1,22 @@
+body{
+  background-color: rgba(0, 0, 0, 0.781);
+}
+.heading{
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  margin: auto;
+  padding-bottom: 10px;
+  width: 25%;
+  border-radius: 25px;
+}
+.fieldContainer{
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Card{
+  background-color: blanchedalmond;
+  height: 200px;
+  width: 20%;
+}
