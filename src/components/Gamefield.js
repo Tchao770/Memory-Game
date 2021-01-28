@@ -22,7 +22,7 @@ function shuffle(arr) {
 
 export default function GameField(props) {
     const [score, setScore] = useState(0);
-    const highscore = useRef(0);
+    const highscore = useRef();
     const [clicked, setClicked] = useReducer(
         (state, action) => ({ ...state, ...action })
         , {
@@ -43,14 +43,18 @@ export default function GameField(props) {
         "Devil's a Parttimer", "No Game No Life", "Mondaiji Tachi"
     ]);
 
+    function resetGame() {
+        setScore(0);
+        cardName.forEach((card) => {
+            setClicked({ [card]: false });
+        })
+    }
+
     const onClick = (card, alreadyClicked) => {
         if (alreadyClicked) {
-            if(score > highscore.current);
+            if (score > highscore.current)
                 highscore.current = score;
-            setScore(0);
-            cardName.forEach((card)=>{
-                setClicked({[card]: false});
-            })
+            resetGame();
         }
         else {
             setScore(score + 1);
@@ -61,7 +65,7 @@ export default function GameField(props) {
 
     return (
         <Fragment>
-            <h1 className="heading">Memory Game: Name That Isekai</h1>
+            <h1 className="heading">Memory Game: Isekai</h1>
             <div className="scoreCounter">
                 <p>Score: {score}</p>
                 <p>Highscore: {highscore.current}</p>
