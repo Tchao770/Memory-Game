@@ -1,4 +1,4 @@
-import { useState, useRef, Fragment } from 'react';
+import { useState, useRef, useReducer, Fragment } from 'react';
 import Card from "./Card.js"
 
 function shuffle(arr) {
@@ -23,15 +23,40 @@ function shuffle(arr) {
 export default function GameField(props) {
     const [score, setScore] = useState(0);
     const highscore = useRef(0);
-    const [cardName, setCardName] = useState([
+    const [clicked, setClicked] = useReducer(
+        (state, action) => ({ ...state, ...action })
+        , {
+            "Re:Zero": false,
+            "Sword Art Online": false,
+            "Overlord": false,
+            "Konosuba": false,
+            "Shield Hero": false,
+            "That Time I Got Reincarnated as a Slime": false,
+            "Devil's a Parttimer": false,
+            "No Game No Life": false,
+            "Mondaiji Tachi": false
+        });
+
+    const [cardName] = useState([
         "Re:Zero", "Sword Art Online", "Overlord",
         "Konosuba", "Shield Hero", "That Time I Got Reincarnated as a Slime",
         "Devil's a Parttimer", "No Game No Life", "Mondaiji Tachi"
     ]);
 
-    const onClick = () => {
-        setScore(score + 1);
-        shuffle(cardName);
+    const onClick = (card, alreadyClicked) => {
+        if (alreadyClicked) {
+            if(score > highscore.current);
+                highscore.current = score;
+            setScore(0);
+            cardName.forEach((card)=>{
+                setClicked({[card]: false});
+            })
+        }
+        else {
+            setScore(score + 1);
+            shuffle(cardName);
+            setClicked({ [card]: true });
+        }
     }
 
     return (
@@ -45,7 +70,7 @@ export default function GameField(props) {
                 {
                     cardName.map((card) => {
                         return (
-                            <Card title={card} onClick={onClick} />
+                            <Card title={card} onClick={onClick} clicked={clicked[card]} />
                         );
 
                     })
