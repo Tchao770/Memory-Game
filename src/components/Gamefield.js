@@ -1,5 +1,8 @@
 import { useState, useRef, useReducer, Fragment } from 'react';
 import Card from "./Card.js"
+import Jikan from "./jikanAPI.js"
+
+const animeList =  Jikan();
 
 function shuffle(arr) {
     var currentIndex = arr.length, temporaryValue, randomIndex;
@@ -21,8 +24,9 @@ function shuffle(arr) {
 }
 
 export default function GameField(props) {
+    console.log(animeList);
     const [score, setScore] = useState(0);
-    const highscore = useRef();
+    const highscore = useRef(0);
     const [clicked, setClicked] = useReducer(
         (state, action) => ({ ...state, ...action })
         , {
@@ -74,7 +78,7 @@ export default function GameField(props) {
                 {
                     cardName.map((card) => {
                         return (
-                            <Card title={card} onClick={onClick} clicked={clicked[card]} />
+                            <Card title={card} onClick={onClick} key={card} clicked={clicked[card]} />
                         );
 
                     })
