@@ -27,9 +27,11 @@ function appendAnimeObj(anime, imgUrl, id) {
 const animeArr = [];
 
 const animeIds = [31240, 11757, 29803, 30831, 35790, 37430, 15809, 19815, 15315];
+
+ 
+
 async function Jikan() {
-    for (const id of animeIds) {
-        await delay(1000);
+    for await (const id of animeIds) {
         let url = `https://api.jikan.moe/v3/anime/${id}`
         await axios.get(url)
             .then(response => {
