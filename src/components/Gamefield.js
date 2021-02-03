@@ -27,7 +27,6 @@ export default function GameField(props) {
         (state, action) => ({ ...state, ...action })
         , props.animeObj);
     const [cardName] = useState(props.animeTitles);
-    
 
     function resetGame() {
         setScore(0);
