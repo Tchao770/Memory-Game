@@ -2,10 +2,14 @@
 
 export default function Card(props) {
     return (
-        <div className="Card" onClick={() => {
-            props.onClick(props.title, props.clicked)
-            }}>
+        <div className="Card" onClick=
+            {
+                () => {
+                    props.onClick(props.title, props.clicked)
+                }
+            }>
             <p>{props.title}</p>
+            <img src={props.url} alt={props.title} />
         </div>
     )
 }

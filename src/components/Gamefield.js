@@ -1,8 +1,5 @@
 import { useState, useRef, useReducer, Fragment } from 'react';
 import Card from "./Card.js"
-import Jikan from "./jikanAPI.js"
-
-const animeList =  Jikan();
 
 function shuffle(arr) {
     var currentIndex = arr.length, temporaryValue, randomIndex;
@@ -24,33 +21,18 @@ function shuffle(arr) {
 }
 
 export default function GameField(props) {
-    console.log(animeList);
     const [score, setScore] = useState(0);
     const highscore = useRef(0);
     const [clicked, setClicked] = useReducer(
         (state, action) => ({ ...state, ...action })
-        , {
-            "Re:Zero": false,
-            "Sword Art Online": false,
-            "Overlord": false,
-            "Konosuba": false,
-            "Shield Hero": false,
-            "That Time I Got Reincarnated as a Slime": false,
-            "Devil's a Parttimer": false,
-            "No Game No Life": false,
-            "Mondaiji Tachi": false
-        });
-
-    const [cardName] = useState([
-        "Re:Zero", "Sword Art Online", "Overlord",
-        "Konosuba", "Shield Hero", "That Time I Got Reincarnated as a Slime",
-        "Devil's a Parttimer", "No Game No Life", "Mondaiji Tachi"
-    ]);
+        , props.animeObj);
+    const [cardName] = useState(props.animeTitles);
+    
 
     function resetGame() {
         setScore(0);
         cardName.forEach((card) => {
-            setClicked({ [card]: false });
+            setClicked({ [card.title]: false });
         })
     }
 
@@ -62,7 +44,7 @@ export default function GameField(props) {
         }
         else {
             setScore(score + 1);
-            shuffle(cardName);
+            shuffle(cardName)
             setClicked({ [card]: true });
         }
     }
@@ -70,15 +52,12 @@ export default function GameField(props) {
     return (
         <Fragment>
             <h1 className="heading">Memory Game: Isekai</h1>
-            <div className="scoreCounter">
-                <p>Score: {score}</p>
-                <p>Highscore: {highscore.current}</p>
-            </div>
+            <Score score={score} highscore={highscore.current} />
             <div className="fieldContainer">
                 {
                     cardName.map((card) => {
                         return (
-                            <Card title={card} onClick={onClick} key={card} clicked={clicked[card]} />
+                            <Card title={card.title} onClick={onClick} key={card.id} clicked={clicked[card.title]} url={card.url} />
                         );
 
                     })
@@ -86,4 +65,14 @@ export default function GameField(props) {
             </div>
         </Fragment>
     )
+
+}
+
+function Score(props) {
+    return (
+        <div className="scoreCounter">
+            <p>Score: {props.score}</p>
+            <p>Highscore: {props.highscore}</p>
+        </div>
+    );
 }

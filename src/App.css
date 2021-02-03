@@ -33,9 +33,10 @@ body {
   background-color: blanchedalmond;
   margin-top: 10px;
   flex: 0 0 31%;
-  height: 20em;
+  height: 25em;
   margin: 10px;
   user-select: none;
+  border-radius: 10%;
 }
 
 .Card:hover {
